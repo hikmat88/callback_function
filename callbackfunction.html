@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback Function</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        let news = [
+            { newsTitle: 'First Title', newsContent: 'This is a first content' },
+            { newsTitle: 'Second Title', newsContent: 'This is a second content' }
+        ]
+        const demoFunction = () => {
+            let result = ""
+            news.forEach(post => {
+                result += `<li>${post.newsTitle}
+                    <ul>
+                        <li>${post.newsContent}</li>
+                        </ul>
+                        </li>`
+            })
+            document.querySelector('div').innerHTML = result
+        }
+        //define the function showNews()
+        const showNews = () => {
+            setTimeout(demoFunction, 2000)
+        }
+        // //call the function
+        // showNews()
+
+        
+        // //define the function addNews()
+        // const addNews=(data)=>{
+        //     setTimeout(()=>{
+        //         news.push(data)
+        //     },3000)
+        // }
+
+        //define the function addNews with callback
+        const addNews=(data,callbackFunction)=>{
+            setTimeout(()=>{
+                news.push(data)
+                callbackFunction()
+            },3000)
+        }
+
+        //call the function addNews() with callback function showNews
+        addNews({ newsTitle: 'Third Title', newsContent: 'This is added later' },showNews)
+    </script>
+</body>
+
+</html>
